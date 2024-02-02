@@ -1,0 +1,27 @@
+global 
+    maxconn 100 
+        defaults 
+            log     global 
+            mode    tcp 
+            retries 2 
+            timeout client 30m 
+            timeout connect 4s 
+            timeout server 30m 
+            timeout check 5s 
+
+        listen stats
+            mode http
+            bind *:32700
+            stats enable
+            stats uri /
+ 
+        frontend proxy 
+            bind *:6432 
+            mode tcp
+            default_backend pgbouncers
+ 
+        backend pgbouncers
+            balance roundrobin
+            mode tcp
+            server pgbouncer_1 {{pgbouncer_ip_1}}:6432 maxconn 100 check 
+            server pgbouncer_2 {{pgbouncer_ip_2}}:6432 maxconn 100 check 

@@ -1,0 +1,11 @@
+- name: Restart patroni
+  ansible.builtin.service:
+    name: patroni
+    daemon_reload: true
+    state: restarted
+    enabled: true
+- name: Restart prometheus-postgres-exporter
+  ansible.builtin.service:
+    name: prometheus-postgres-exporter
+    state: restarted
+    enabled: true

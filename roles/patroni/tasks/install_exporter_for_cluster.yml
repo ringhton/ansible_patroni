@@ -1,0 +1,27 @@
+- name: Install prometheus-postgres-exporter
+  ansible.builtin.apt:
+    name: prometheus-postgres-exporter
+    state: latest
+    update_cache: true
+- name: Copy sql command for prometheus-postgres-exporter
+  ansible.builtin.copy:
+    src: prometheus.sql
+    dest: /home/user/prometheus.sql
+    owner: root
+    group: root
+    mode: '0644'
+- name: Copy file for prometheus-postgres-exporter
+  ansible.builtin.copy:
+    src: prometheus-postgres-exporter.default
+    dest: /etc/default/prometheus-postgres-exporter
+    owner: prometheus
+    group: prometheus
+    mode: '0640'
+#  notify:
+#    - Restart prometheus-postgres-exporter
+### Узнать лидера
+
+### Если он - раскатать базу для exporter
+
+#  notify:
+#    - Restart prometheus-postgres-exporter

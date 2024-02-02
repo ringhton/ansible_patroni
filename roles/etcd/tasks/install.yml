@@ -1,0 +1,24 @@
+- name: Copy etcd.sh
+  ansible.builtin.copy:
+    src: etcd.sh
+    dest: /home/user/etcd.sh
+    owner: "user"
+    group: "user"
+    mode: "0755"
+- name: Install etcd
+  ansible.builtin.shell:
+    cmd: /home/user/etcd.sh
+  notify:
+    - Restart etcd
+- name: Check etcd files in bin directory
+  ansible.builtin.shell:
+    cmd: ls /usr/local/bin/etcd | awk -F "/" '{print $4}'
+  register:
+    result
+#- ansible.builtin.debug:
+#    var: result.stdout
+- name: Copy etcd files in bin directory
+  ansible.builtin.shell:
+    cmd: cp /tmp/etcd-download-test/etcd* /usr/local/bin
+  when:
+    result.stdout == ""

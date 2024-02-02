@@ -1,0 +1,19 @@
+- name: Copy node_exporter.sh
+  ansible.builtin.copy:
+    src: node_exporter.sh
+    dest: /home/user/node_exporter.sh
+    owner: "user"
+    group: "user"
+    mode: "0755"
+- name: Install node_exporter
+  ansible.builtin.shell:
+    cmd: /home/user/node_exporter.sh
+- name: Copy service file for node_exporter
+  ansible.builtin.copy:
+    src: node_exporter.service
+    dest: /lib/systemd/system/node_exporter.service
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - Restart node_exporter

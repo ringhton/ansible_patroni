@@ -1,0 +1,27 @@
+- name: Create directory for db
+  ansible.builtin.file:
+    path: /db/etcd
+    state: directory
+- name: Create user
+  ansible.builtin.user:
+    name: postgres
+    password: "{ {  pwd | password_hash('sha512') } }"
+  vars:
+    pwd: "postgres"
+- name: Copy file for etcd
+  ansible.builtin.template:
+    src: etcd.yml.j2
+    dest: /etc/etcd.yml
+    owner: postgres
+    group: postgres
+    mode: '0644'
+  notify:
+    - Restart etcd
+- name: Recursively change ownership of a directory db
+  ansible.builtin.file:
+    path: /db
+    state: directory
+    recurse: yes
+    owner: postgres
+    group: postgres
+

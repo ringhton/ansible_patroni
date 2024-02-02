@@ -1,0 +1,11 @@
+haproxy_ip: ""
+etcd_ip_1: ""
+etcd_ip_2: ""
+etcd_ip_3: ""
+pgbouncer_ip_1: ""
+pgbouncer_ip_2: ""
+patroni_ip_1: ""
+patroni_ip_2: ""
+patroni_ip_3: ""
+patroni_ip_4: ""
+

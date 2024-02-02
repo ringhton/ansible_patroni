@@ -1,0 +1,28 @@
+- name: Copy prometheus.sh
+  ansible.builtin.copy:
+    src: prometheus.sh
+    dest: /home/user/prometheus.sh
+    owner: "user"
+    group: "user"
+    mode: "0755"
+- name: Install prometheus
+  ansible.builtin.shell:
+    cmd: /home/user/prometheus.sh
+- name: Copy config file for prometheus
+  ansible.builtin.template:
+    src: prometheus.yml.j2
+    dest: /etc/prometheus/prometheus.yml
+    owner: prometheus
+    group: prometheus
+    mode: '0644'
+  notify:
+    - Restart prometheus
+- name: Copy service file for prometheus
+  ansible.builtin.copy:
+    src: prometheus.service
+    dest: /lib/systemd/system/prometheus.service
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - Restart prometheus

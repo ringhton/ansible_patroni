@@ -1,0 +1,17 @@
+- name: Install necessary packages
+  ansible.builtin.apt:
+    name:
+      - adduser
+      - libfontconfig1
+      - musl
+    state: latest
+- name: Download grafana package
+  ansible.builtin.get_url:
+    url: https://dl.grafana.com/enterprise/release/grafana-enterprise_10.2.3_amd64.deb
+    dest: /opt/grafana_10.2.3_amd64.deb
+    mode: '0755'
+- name: Install grafana
+  ansible.builtin.shell:
+    cmd: dpkg -i /opt/grafana_10.2.3_amd64.deb
+  notify:
+    - Restart grafana

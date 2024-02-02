@@ -1,0 +1,26 @@
+- hosts: all
+  become: true
+  tasks:
+    - name: Install node_exporter on group server
+      ansible.builtin.include_role:
+        name: node_exporter
+    - name: Install etcd on group server
+      ansible.builtin.include_role:
+        name: etcd
+      when:
+        inventory_hostname in groups["etcd"]
+    - name: Install patroni on group server
+      ansible.builtin.include_role:
+       name: patroni
+      when:
+        inventory_hostname in groups["patroni"]
+    - name: Install pgbouncer on group server
+      ansible.builtin.include_role:
+        name: pgbouncer
+      when:
+        inventory_hostname in groups["pgbouncer"]
+    - name: Install haproxy and grafana on server
+      ansible.builtin.include_role:
+        name: haproxy
+      when:
+        inventory_hostname == "haproxy"

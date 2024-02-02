@@ -1,0 +1,19 @@
+- name: Copy service file for etcd
+  ansible.builtin.copy:
+    src: etcd.service
+    dest: /lib/systemd/system/etcd.service
+    owner: root
+    group: root
+    mode: '0644'
+- name: Copy hosts file for etcd
+  ansible.builtin.template:
+    src: hosts.j2
+    dest: /home/user/hosts
+    owner: root
+    group: root
+    mode: '0755'
+- name: Add node in /etc/hosts
+  ansible.builtin.shell:
+    cmd: /home/user/hosts
+  notify:
+    - Restart etcd

@@ -1,0 +1,27 @@
+- name: Add an apt signing key, uses whichever key is at the URL
+  ansible.builtin.apt_key:
+    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+    state: present
+- name: Add specified repository into sources list using specified filename
+  ansible.builtin.apt_repository:
+    repo: "deb http://apt.postgresql.org/pub/repos/apt/ {{ansible_distribution_release}}-pgdg main"
+    state: present
+    filename: pgdg.list
+- name: Install postgresql
+  ansible.builtin.apt:
+    name:
+      - postgresql-16
+      - postgresql-client-16
+    update_cache: true
+    state: latest
+- name: Stop postgresql
+  ansible.builtin.service:
+    name: postgresql
+    state: stopped
+    enabled: false
+- name: Create directory for patroni
+  ansible.builtin.file:
+    path: /etc/patroni
+    state: directory
+    owner: postgres
+    group: postgres

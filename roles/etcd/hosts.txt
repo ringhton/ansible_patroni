@@ -1,0 +1,10 @@
+127.0.1.1 etcd-1.a0765beb344ef47703b1d4cacdbae48c
+
+127.0.0.1 localhost
+
+188.166.109.14	rebrain-etcd-node-1	etcd-1
+
+188.166.108.167	rebrain-etcd-node-2	etcd-2
+
+188.166.108.170	rebrain-etcd-node-3	etcd-3
+

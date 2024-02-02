@@ -1,0 +1,25 @@
+- name: Copy file for patroni
+  ansible.builtin.template:
+    src: patroni.yml.j2
+    dest: /etc/patroni/patroni.yml
+    owner: postgres
+    group: postgres
+    mode: '0600'
+  notify:
+    - Restart patroni
+- name: Copy service file for patroni
+  ansible.builtin.copy:
+    src: patroni.service
+    dest: /lib/systemd/system/patroni.service
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - Restart patroni
+#- name: Stop patroni on replica 3
+#  ansible.builtin.service:
+#    name: patroni
+#    state: stopped
+#  when:
+#    ansible_hostname == "pgsql-replica-3"
+

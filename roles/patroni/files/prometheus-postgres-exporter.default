@@ -1,0 +1,2 @@
+DATA_SOURCE_NAME='user=prometheus host=/run/postgresql dbname=rebrain_courses_db'
+ARGS=''

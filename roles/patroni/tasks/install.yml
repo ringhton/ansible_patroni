@@ -1,0 +1,17 @@
+- name: Install python
+  ansible.builtin.apt:
+    name:
+      - python3-psycopg2
+      - python3-pip
+      - python-yaml
+    state: latest
+    update_cache: true
+  notify:
+    - Restart patroni
+- name: Install tools
+  ansible.builtin.pip:
+    name: setuptools
+    state: forcereinstall
+- name: Install patroni
+  ansible.builtin.pip:
+    name: patroni[etcd]

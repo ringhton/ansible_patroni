@@ -1,0 +1,17 @@
+- name: Add an apt signing key, uses whichever key is at the URL
+  ansible.builtin.apt_key:
+    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+    state: present
+- name: Add specified repository into sources list using specified filename
+  ansible.builtin.apt_repository:
+    repo: "deb http://apt.postgresql.org/pub/repos/apt/ {{ansible_distribution_release}}-pgdg main"
+    state: present
+    filename: pgdg.list
+- name: Install pgbouncer
+  ansible.builtin.apt:
+    name:
+      - pgbouncer
+      - postgresql-contrib-9.6
+    state: latest
+    update_cache: true
+

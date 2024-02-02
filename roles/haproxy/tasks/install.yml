@@ -1,0 +1,6 @@
+- name: Install haproxy
+  ansible.builtin.apt:
+    name: haproxy
+    state: latest
+    update_cache: true
+

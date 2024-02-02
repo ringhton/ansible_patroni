@@ -1,0 +1,10 @@
+haproxy: connect command: ssh user@178.62.231.229 password: ubepohinldfi
+etcd-1: connect command: ssh user@188.166.98.208 password: lxulfpogatkd
+etcd-2: connect command: ssh user@188.166.92.133 password: ofwdfdegonqk
+etcd-3: connect command: ssh user@188.166.86.94 password: gykdjlquoqtm
+pgbouncer-1: connect command: ssh user@178.62.231.214 password: ocwjzomejaxw
+pgbouncer-2: connect command: ssh user@178.62.232.11 password: xozvedvedhpf
+pgsql-master: connect command: ssh user@188.166.36.223 password: jjfxjbvmsqoi
+pgsql-replica-1: connect command: ssh user@178.62.231.219 password: motzpbiporpe
+pgsql-replica-2: connect command: ssh user@188.166.37.5 password: lyckvanfuxoy
+pgsql-replica-3: connect command: ssh user@178.62.232.4 password: bfxagmifcykf

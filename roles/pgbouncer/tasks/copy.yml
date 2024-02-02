@@ -1,0 +1,18 @@
+- name: Copy file for pgbouncer
+  ansible.builtin.template:
+    src: pgbouncer.ini.j2
+    dest: /etc/pgbouncer/pgbouncer.ini
+    owner: postgres
+    group: postgres
+    mode: '0600'
+  notify:
+    - Restart pgbouncer
+- name: Copy file with user for pgbouncer
+  ansible.builtin.copy:
+    src: userlist.txt
+    dest: /etc/pgbouncer/userlist.txt
+    owner: postgres
+    group: postgres
+    mode: '0600'
+  notify:
+    - Restart pgbouncer
